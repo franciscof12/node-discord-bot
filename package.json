@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "register": "node deploy-commands.js"
   },
   "repository": {
     "type": "git",

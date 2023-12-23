@@ -19,6 +19,6 @@ export async function execute (interaction) {
   await interaction.reply(`Recordatorio configurado para dentro de ${tiempo} minutos: "${mensaje}"`)
 
   setTimeout(async () => {
-    await interaction.followUp(`⏰ Recordatorio: ${mensaje}`)
-  }, tiempo * 60000) // tiempo en milisegundos
+    await interaction.followUp(`@everyone ⏰ Recordatorio: ${mensaje}`)
+  }, tiempo * 60000)
 }
