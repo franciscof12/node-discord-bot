@@ -8,7 +8,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 dotenv.config()
-const client = new Client({ intents: [GatewayIntentBits.Guilds] })
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers
+  ]
+})
 
 client.commands = new Collection()
 const foldersPath = path.join(__dirname, 'commands')
@@ -49,6 +55,22 @@ client.on(Events.InteractionCreate, async interaction => {
     } else {
       await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true })
     }
+  }
+})
+
+client.on('guildMemberAdd', async member => {
+  const welcomeChannelId = '1188208568931979294'
+  const channel = await client.channels.fetch(welcomeChannelId)
+
+  if (!channel) {
+    console.warn(`Channel with ID ${welcomeChannelId} was not found!`)
+    return
+  }
+
+  try {
+    await channel.send(`¡Bienvenido al servidor, ${member.displayName}! 🎉`)
+  } catch (error) {
+    console.error('Error sending message:', error)
   }
 })
 
